@@ -21,12 +21,12 @@ script:
   if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
     TAG=$(grep "ENV MYSQL_VERSION" Dockerfile | awk 'NF>1{print $NF}')
-    docker tag rpi-mysql hypriot/rpi-mysql:arm-$TAG
-    docker push hypriot/rpi-mysql:arm-$TAG
-    docker manifest create hypriot/rpi-mysql:$TAG hypriot/rpi-mysql:arm-$TAG
-    docker manifest annotate hypriot/rpi-mysql:$TAG hypriot/rpi-mysql:arm-$TAG --os linux --arch arm --variant v6
-    docker manifest push hypriot/rpi-mysql:$TAG
-    docker manifest create hypriot/rpi-mysql hypriot/rpi-mysql:arm-$TAG
-    docker manifest annotate hypriot/rpi-mysql hypriot/rpi-mysql:arm-$TAG --os linux --arch arm --variant v6
-    docker manifest push hypriot/rpi-mysql
+    docker tag rpi-mysql adamburns/rpi-mysql:arm-$TAG
+    docker push adamburns/rpi-mysql:arm-$TAG
+    docker manifest create adamburns/rpi-mysql:$TAG adamburns/rpi-mysql:arm-$TAG
+    docker manifest annotate adamburns/rpi-mysql:$TAG adamburns/rpi-mysql:arm-$TAG --os linux --arch arm --variant v6
+    docker manifest push adamburns/rpi-mysql:$TAG
+    docker manifest create adamburns/rpi-mysql adamburns/rpi-mysql:arm-$TAG
+    docker manifest annotate adamburns/rpi-mysql adamburns/rpi-mysql:arm-$TAG --os linux --arch arm --variant v6
+    docker manifest push adamburns/rpi-mysql
   fi
